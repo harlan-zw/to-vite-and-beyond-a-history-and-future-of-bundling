@@ -8,6 +8,7 @@ export default defineWindiSetup(() => ({
     ],
     exclude: [
       resolve(__dirname, 'node_modules'),
+      resolve(__dirname, 'demo'),
     ],
   },
   safelist: ['prose-sm', 'prose-xl', 'prose-2xl', 'prose-xs', 'prose-base'],

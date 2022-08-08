@@ -12,25 +12,25 @@ info: |
 drawings:
   persist: false
 css: windicss
-title: Laravel's Vite Adoption
+title: A brief history of bundling
 ---
 
-# Arriving at Laravel Vite<div class="mt-10 text-2xl">A brief history of bundling<br> and what the future holds</div>
+# To Laravel Vite and Beyond
 
-<div class="opacity-80 text-sm absolute -bottom-2 right-10">Presentation By Harlan Wilton <img src="img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
+## <div class="mt-10 text-2xl text-gray-300">A brief history of bundling<br> and what the future holds</div>
+
+<div class="opacity-80 text-sm absolute -bottom-2 right-10">Presentation By Harlan Wilton <img src="/img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
 
 <!--
-- Welcome everyone, great to be back at a meetup. First one I've been too
+- Welcome everyone, great to be here and see some familiar faces. This is the first meetup I've been too in a long time
 
 - Today I wanted to talk about Vite. Sure you've all heard of it by now.
 
-- I've spent a lot of time in the frontend space for the last couple of years and it's been pretty interesting to see how Vite has progressed
-
 - With Laravel 9 adopting Vite, I thought it might be worth sharing a refresher on frontend space, specifically around bundling
 
-- But also looking at where things are now and where it's headed
+- But also looking at where things are now and where the frontend space is headed
 
-- I've tried to keep it simple and  high level but let me know if you have any questions
+- I've tried to keep it simple and  high level but let me know if you have any questions as we go
 -->
 
 ---
@@ -53,7 +53,7 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 ::right::
 
 
-<img src="img.png" class="w-50 h-50 rounded mx-auto" />
+<img src="/img.png" class="w-50 h-50 rounded mx-auto" />
 
 <!--
 - My name is Harlan
@@ -61,6 +61,17 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 - Been doing open-source for over a year now
 - If you use Twitter, then you should definitely give me a follow
 -->
+
+---
+layout: section
+---
+
+# Things to cover
+
+- How did we get to Vite?
+- How does it supersede Laravel Mix?
+- What is the future of frontend bundling?
+- Some fun nostalgia
 
 ---
 layout: two-cols
@@ -111,28 +122,32 @@ Look at how we've solved the bundling problem through the ages
 -->
 
 ---
-layout: two-cols
-size: sm
+layout: two-cols-side
+size: xl
 ---
 
-# Stone Age: Birth of Tooling
+# Stone Age: Birth of Modules 
 
+<div class="font-mono text-lg italic opacity-90 -mt-5">2008 - 2012</div>
 
-**Tools**: <logos-html-5 /> HTML 5, <logos-css-3 /> CSS 3, jQuery, Bootstrap, <logos-sass /> Sass, maybe your IDE helped you
+- No build step
+- No node_modules
+- No JavaScript Server-Side Rendering
+- Lots of useful packages: jQuery, Bootstrap, Polyfill, Lodash, etc
 
-**Module Standard**: IIFE
+::highlights::
 
-### Innovations
+<div><logos-html-5 /> HTML 5</div>
+<div><logos-css-3 /> CSS 3 </div>
+<div>jQuery</div>
+<div><logos-bootstrap /> Bootstrap</div>
+<div><logos-sass /> Sass</div>
+<div><logos-brackets /> Brackets</div>
+<div><logos-sublimetext-icon /> Sublime</div>
 
-::left::
+::modules::
 
-- No build step ⚡ INSTANT START ⚡
-- No node_modules, download dependencies 🙃
-
-::right::
-
-- Manually run most tools if your IDE didn't for you (concats, minifies, autoprefixers, validators)
-- Caching?
+IIFE
 
 <!--
 - We are back in time, to the Stone age. 
@@ -148,6 +163,8 @@ size: sm
 - We use modules which are called IIFE
 
 - We don't talk about anything before the stone age
+
+- Sublime /
 -->
 
 ---
@@ -207,7 +224,7 @@ size: sm
 ```
 
 <!--
-- A  basic example of what it looked like, pretty easy and nice
+- A basic example of what it looked like, pretty easy and nice
 - so the jQuery there would be an IIFE module
 -->
 
@@ -218,21 +235,14 @@ size: xl
 
 # Stone Age Problems
 
+- Websites are bloating quickly with IIFE modules
+- Maintaining third-party packages is cumbersome
 - Many cross browser bugs
-- Unoptimised code
-- IIFE modules eager loading and global scope
-- Manually refresh the page!
 
 <!--
-- It did have some notable issues though
+- IIFE were very difficult to optimise, you'd need to roll your own version of a package only picking the things you were going to use
 
 - The browser engines were way out of sync, you'd run into a lot of issues when testing between the browsers of what was supported, what needed vendor prefixes, etc
-
-- Websites were slow, while generally they had less scripts than today, the surrounding optimisations were minimal
-
-- IIFE were very difficult to optimise and you could run into conflicts within the global scope
-
-- Of course, had to manually refresh the page when making code changes, although some IDEs did have solutions for that
 -->
 
 ---
@@ -240,7 +250,7 @@ layout: section
 ---
 
 <div class="h-full flex items-center">
-<img src="img_2.png" class="h-75 mx-auto my-auto">
+<img src="/img_2.png" class="h-75 mx-auto my-auto">
 </div>
 
 <!--
@@ -252,27 +262,34 @@ layout: section
 -->
 
 ---
-layout: two-cols
+layout: two-cols-side
 size: sm
 ---
 
 # Bronze Age: It's a Web App Actually
 
-**Tools**: <logos-grunt /> Grunt, <logos-gulp /> Gulp, <logos-browserify-icon /> Browserify, <logos-bower /> Bower, <logos-require /> Require.js, <logos-laravel /> Laravel Elixir
+<div class="font-mono text-lg italic opacity-90 -mt-5">2012 - 2014</div>
 
-**Module Standards**: CJS, AMD, UMD, IIFE
+- Task Runners are adopted (Grunt, Gulp)
+- CSS pre-processors take on wide adoption (SASS, LESS, etc)
+- Community split in module choice, coding for Browser or Node
 
-::left::
+::highlights::
 
-- Pipeline paradigm
-- Watch for changes, rebuild and automatic refreshes!
-- Start of the great module wars
+<div><logos-grunt /> Grunt</div>
+<div> <logos-gulp /> Gulp</div>
+<div><logos-require /> Require.js</div>
+<div><logos-bower /> Bower</div>
+<div><logos-browserify-icon /> Browserify</div>
+<div><logos-laravel /> Laravel Elixir</div>
+<div><logos-nodejs-icon /> Node.js</div>
+<div><logos-npm /> NPM</div>
+<div><logos-angular /> Angular</div>
 
-::right::
+::modules::
 
-- Lots of competing module standards
-- Dependency management with Bower
-- CSS pre-processors take on wide adoption
+CJS, AMD, UMD, IIFE
+
 
 <!--
 - Now we enter the bronze age
@@ -286,6 +303,8 @@ size: sm
 - So begins in the Bronze age the great Module wars, as you can see there, we now have four competing module types
 
 - Let's see what different they have
+
+- todo: LARAVEL MIX / GULP
 -->
 
 ---
@@ -306,7 +325,8 @@ const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
-Note: The browser **does not** understand this code. Node does understand this.
+- Browser: Does not support this, requires transpiling.
+- Node: Supports this.
 
 <!--
 - CommonJS modules were the original way to package JavaScript code for Node.js.
@@ -335,7 +355,7 @@ const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
-Note: The browser **does** understand this code.
+- Browser & Node: Does support this (with Require.js), no transpiling needed.
 
 <!--
 - AMD was developed by Require.js
@@ -368,7 +388,7 @@ const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
-Note: The browser and Node understands this code.
+- Browser & Node: Does support this, but not recommended.
 
 <!--
 - UMD was a way to ship a package that could be used from AMD or CommonJS module
@@ -379,9 +399,9 @@ Note: The browser and Node understands this code.
 layout: section
 ---
 
-# Pipeline Paradigm (gulp)
+# Gulp Pipelines Example
 
-```ts
+```ts {all|4-11}
 const source = './src/js/*.js';
 
 src(source)
@@ -422,7 +442,7 @@ layout: section
 ---
 
 <div class="h-full flex items-center">
-<img src="img_1.png" class="h-85 mx-auto my-auto">
+<img src="/img_1.png" class="h-85 mx-auto my-auto">
 </div>
 
 <!--
@@ -430,30 +450,41 @@ layout: section
 -->
 
 ---
-layout: two-cols
+layout: two-cols-side
 size: sm
 ---
 
 # Iron Age: Webpack Time
 
-**Tools**: <logos-webpack /> webpack, <logos-babel /> Babel, <logos-npm-icon /> NPM
+<div class="font-mono text-lg italic opacity-90 -mt-5">2014 - 2016</div>
 
-**Module Standards**: CJS, AMD, UMD, IIFE 
-
-### Innovations
-
-::left::
-
-* Dev Server with Hot Module Replacement
-* Code Splitting
-* Tree Shaking
-
-::right::
-
+- Dev Server with Hot Module Replacement
+- Code Splitting
+- Tree Shaking
 - Dependency graph resolving
+- Some ES6 adoption is 
 - NPM and babel are now the norm
-- CJS exports becomes the norm, AMD and UMD losing favour
+- CJS exports becomes the norm, UMD is dead
 
+::highlights::
+
+<div><logos-webpack /> webpack</div>
+<div><logos-babel /> Babel</div>
+<div><logos-yarn /> Yarn</div>
+<div><logos-vue /> Vue.js</div>
+<div><logos-react /> React</div>
+
+::modules::
+
+CJS, AMD, UMD, IIFE
+
+<!--
+- webpack came out at a similar time to Gulp, but Gulp had a lot more traction
+- eventually webpack took over once the loader ecosystem caught up
+- around the same time as babel
+
+- babel let you write ES6 code and transpile it to something Node and the browser could understand
+-->
 
 ---
 layout: section
@@ -525,25 +556,33 @@ module.exports = {
 -->
 
 ---
-layout: two-cols
-size: xs
+layout: section
 ---
-
-::left::
 
 # Iron Age Problems
 
 - Incredibly painful to understand, configure and debug webpack
 - Dev-server and HMR builds do not scale well, very slow
 - Lots of boilerplate
+- node_modules big
 
+<!--
+- because you're transpiling everything before you start, it's very slow
+-->
+
+---
+
+
+<div class="h-full flex items-center">
+<img src="/img_9.png" class="w-125 mx-auto rounded" width="450">
+</div>
 
 ---
 layout: section
 ---
 
 <div class="h-full flex items-center">
-<img src="img_4.png" class="w-85 mx-auto">
+<img src="/img_4.png" class="w-85 mx-auto rounded" width="450">
 </div>
 
 <!--
@@ -551,32 +590,34 @@ layout: section
 -->
 
 ---
-layout: two-cols
 size: sm
+layout: two-cols-side
 ---
 
-# Middle Ages: Solving Webpack
+# Middle Ages: ES6 And Solving Webpack
 
-**Tools**: <logos-webpack /> Webpack 5, <logos-rollup /> Rollup, <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript,  <logos-laravel /> Laravel Mix, <logos-nuxt-icon /> Nuxt, <logos-nextjs-icon class="bg-white px-1px rounded" /> Next
+<div class="font-mono text-lg italic opacity-90 -mt-5">~ 2016 - 2020</div>
 
-**Module Standards**: ESM, CJS, AMD, UMD, IIFE
-
-### Innovations
-
-::left::
-
+- Release of ES6
 - Powerful abstraction layers (Mix, Nuxt, Next, etc)
 - Much less boilerplate, things _just work_
-- Esbuild speeds things up a lot, more focus on building better optimised tools in other languages
-
-::right::
-
 - ESM modules start gaining some interest, exporting CJS is now the standard
 - Rollup provides a much nicer API than webpack
-- TypeScript demand is high
+
+::highlights::
+
+<div><logos-webpack /> Webpack 5</div>
+<div><logos-rollup /> Rollup</div>
+<div><logos-laravel /> Laravel Mix</div>
+<div><logos-nuxt-icon /> Nuxt.js</div>
+<div><logos-nextjs-icon class="bg-white px-1px rounded" /> Next.js</div>
+
+::modules::
+
+ESM, CJS, AMD, UMD, IIFE
 
 <!--
-- Middle ages I characterise as the age of solving webpack
+- Middle ages I characterise as ES^ and age of solving webpack
 
 - Solving the complexity of configuring, which showed itself through abstraction layers and frontend frameworks, such as Laravel Mix, Nuxt, Next, etc
 
@@ -592,24 +633,109 @@ layout: section
 size: xl
 ---
 
-# ESM / MJS (ECMAScript module) - ES6
+# ES6 - ECMAScript 2016
 
-```javascript {all|5}
-function greeting () {
+- Next iteration of JavaScript, 10 years in the making
+- ES5 was released in 2009, first major revision to JS. Node and browsers understood this
+- HUGE DX improvements over vanilla JS
+- await / async
+- ES6 needed to be transpiled to ES5 for browsers and node
+
+
+---
+layout: section
+size: xl
+---
+
+# ESM (ECMAScript module) - ES6
+
+```javascript {all|1,7}
+// myLib.js
+export function greeting () {
   console.log('Hello world!')
 }
 
-export { greeting }
-```
-
-```javascript {all|1}
+// app.js
 import { greeting } from './myLib.js'
-
-// Hello World
 greeting()
 ```
 
-Note: Node understands this. Browsers will eventually understand this with time and some magic.
+
+Browsers & Node: Do not understand this (yet). Babel or esbuild is needed to transpile.
+
+<!--
+- had to transpile this at one point to CJS or AMD
+
+- ES6 was a huge update and included many other improvements besides the esmodule
+
+- You may see MJS files, these are ESM
+-->
+
+---
+layout: section
+size: xs
+---
+
+# Middle Ages Issues
+
+- Browsers and Node do not understand the new ES6 or ESM
+- Build and HMR time for mid-large size apps is becoming a problem
+- The ecosystem is divided between webpack, Rollup and other solutions
+- Module compatibility becomes increasing frustrating (ESM, CJS. AMD, UMD, IIFE)
+
+<!--
+- this is specifically what Laravel Mix has issues with
+- main issue is really performance for most developers, it's just too slow-
+
+- todo: formodule devs
+-->
+
+---
+
+<div class="h-full flex items-center">
+<img src="/img_3.png" class="w-140 mx-auto rounded" width="650">
+</div>
+
+<!--
+- all had our big brain masks on but we were still having a lot of issues
+-->
+
+---
+layout: two-cols-side
+---
+
+# Modern Era: Just In Time
+
+<div class="font-mono text-lg italic opacity-90 -mt-5">2021 - PRESENT</div>
+
+- Zero config solutions
+- Minimal building with JIT
+- Leverage native browser ESM support and caching
+- Rollup taking over webpack
+- New JavaScript runtimes (deno)
+- Native TypeScript support default
+- Esbuild speeds things up a lot
+
+::highlights::
+
+<div><logos-esbuild class="mr-1" /> esbuild</div>
+<div><logos-typescript-icon class="mr-1" /> TypeScript</div>
+<div><logos-vitejs class="mr-1" /> Vite</div>
+<div><logos-snowpack class="bg-white px-2px rounded mr-1" /> Snowpack</div>
+<div><logos-wmr class="mr-1" /> WMR</div>
+<div><logos-deno class="mr-1" /> Deno</div>
+<div><logos-pnpm class="mr-1" /> PNPM</div>
+<div><logos-vitest class="mr-1" /> Vitest</div>
+
+::modules::
+
+ESM is preferred
+
+Legacy support: CJS, AMD
+
+<!--
+- Welcome to the modern era, the era of things being just in time
+-->
 
 
 ---
@@ -624,64 +750,14 @@ Note: Node understands this. Browsers will eventually understand this with time 
 
 ---
 
-![img_6.png](img_6.png)
+# TypeScript Growth
 
-<!--
-- typescript usage had a slow growth but has really exploded
--->
-
----
-layout: section
-size: xs
----
-
-# Middle Ages Issues
-
-- Build and HMR time for mid-large size apps is becoming a problem, even with tools like esbuild
-- The ecosystem is divided between webpack, Rollup and other solutions
-- Module compatibility remains a frustrating topic (CJS, ESM. AMD, UMD, IIFE)
-
-<!--
-- this is specifically what Laravel Mix has issues with
-- main issue is really performance for most developers, it's just too slow
--->
-
----
-
-<div class="h-full flex items-center">
-<img src="img_3.png" class="w-85 mx-auto">
+<div class="flex items-center">
+<img src="/img_6.png" class="w-170 mx-auto rounded" width="700">
 </div>
 
 <!--
-- all had our big brain masks on but we were still having a lot of issues
--->
-
----
-layout: two-cols
----
-
-# Modern Era: Just In Time
-
-**Tools**: <logos-vitejs /> Vite, <logos-snowpack class="bg-white rounded px-2px" /> Snowpack, <logos-wmr /> WMR, <logos-deno /> Deno
-
-**Module Standards**: ESM, CJS, AMD, UMD, IIFE
-
-## Innovations
-
-::left::
-
-- Zero config solutions
-- Minimal building with JIT
-- Leverage native browser ESM support and caching
-
-::right::
-
-- Rollup taking over webpack
-- New JavaScript runtimes (deno)
-- Native TypeScript support default
-
-<!--
-- Welcome to the modern era, the era of things being just in time
+- typescript usage had a slow growth but has really exploded
 -->
 
 ---
@@ -690,7 +766,7 @@ layout: section
 
 # Vite
 
-Tech: <logos-rollup /> Rollup,  <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript
+Tech: <logos-rollup /> Rollup,  <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript, Express
 
 - Not a "bundler", rather, it's a pre-configured build environment using the Rollup bundler and a tool for local development
 - "Enhanced" Native ESM
@@ -715,60 +791,61 @@ layout: section
 layout: section
 ---
 
-# Vite waterfall
-
-
-<div class="flex items-center">
-<img src="img_7.png" class="w-150 mx-auto">
-</div>
-
-
----
-layout: section
----
-
 # Modern Era Issues
 
 - Lots of new frameworks popping up, hard to keep accross them (Astro, Fresh, Solid, etc)
 - Still quite a bit of JavaScript for basic sites
 - Migration can be difficult, many stuck in the Middle ages
+- Supporting legacy module standards is ambiguous
 
 ---
 
 <div class="h-full flex items-center">
-<img src="img_5.png" class="w-85 mx-auto">
+<img src="/img_5.png" class="w-85 mx-auto rounded" width="350">
 </div>
 
 ---
-layout: two-cols
+layout: two-cols-side
 ---
 
-# Future Era: An efficient ecosystem?
+# Future Era: Efficient DX and Ecosystem
 
-**Tools**: Vite Node, Web Workers, Edge Rendering, Bun, StackBlitz, UnJS, Nuxt v3
-
-**Module Standard**: ESM
-
-## Innovations
-
-::left::
+<div class="font-mono text-lg italic opacity-90 -mt-5">PRESENT - FUTURE</div>
 
 - JS packages will run anywhere, without bindings for node / browser (UnJS)
 - No build step
 - JIT rendering on the edge
-- Experimental runtimes like bun offering unparalleled speeds
-
-::right::
-
+- Experimental runtimes offering unparalleled speeds
 - Island based reactivity, 0 js runtime overhead
-- Custom runtimes supporting native TypeScript (vite-node) 
+- Custom JS runtimes supporting native TypeScript (vite-node) 
 - Powerful online IDE and runtimes like StackBlitz
-- CSS Pre Processors will be dropped
+- CSS Pre Processors are on the way out
+
+::highlights::
+
+<div><logos-vitejs /> Vite Node (runtime)</div>
+<div><logos-vercel-icon /> Edge Rendering</div>
+<div><logos-chrome /> Web Workers</div>
+<div><logos-bun /> Bun</div>
+<div><logos-stackblitz-icon /> Stackblitz</div>
+<div><logos-javascript /> UnJS</div>
+<div><logos-nuxt-icon /> Nuxt v3</div>
+<div><logos-fresh /> Fresh</div>
+
+::modules::
+
+ESM is default
+
+Legacy support: CJS, AMD
+
+<!--
+- by anywhere?
+-->
 
 ---
 
 <div class="h-full flex items-center">
-<img src="img_8.png" class="w-120 mx-auto">
+<img src="/img_8.png" class="w-120 mx-auto rounded">
 </div>
 
 
@@ -778,15 +855,13 @@ layout: section
 
 # Takeaways
 
-- Frontend has had a lot of inefficiencies over the years
+- Vite was the natural next step of the frontend ecosystem
 
-- The ecosystem is getting better and aligning (at a low / mid level)
+- New ecosystem efficiency is unlocked with aligning at a low / mid level and on the ESM module standard
 
-- Module standards are becoming more sane
+- Has taken almost 6 years for Browsers and Node to support a language update (ES5 -> ES6)
 
-- Browsers are now catching up
-
-- Probably still easier to just SSR with PHP  / Laravel
+- Probably still easier to just SSR with PHP / Laravel
 
 <!--
 # Takeaways
