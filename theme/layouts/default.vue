@@ -2,7 +2,7 @@
 const props = defineProps({
   size: {
     type: String,
-    default: 'lg'
+    default: 'base'
   },
 })
 </script>

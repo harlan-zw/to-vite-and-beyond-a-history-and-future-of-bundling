@@ -15,17 +15,22 @@ css: windicss
 title: Laravel's Vite Adoption
 ---
 
-# Getting to Laravel Vite<div class="mt-10 text-2xl">A brief history of bundling modules</div>
+# Arriving at Laravel Vite<div class="mt-10 text-2xl">A brief history of bundling<br> and what the future holds</div>
 
 <div class="opacity-80 text-sm absolute -bottom-2 right-10">Presentation By Harlan Wilton <img src="img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
 
 <!--
-- A lot has been happenining in frontend world, Vite being one of the biggest
-- Laravel 9 has adopted Vite
-- But to understand why Vite is being adopted, you need the full context
-- The history of how we've dealt with modules and bundling over time
+- Welcome everyone, great to be back at a meetup. First one I've been too
 
-- I've tried to keep it high level but let me know if you have any questions as it's pretty technical
+- Today I wanted to talk about Vite. Sure you've all heard of it by now.
+
+- I've spent a lot of time in the frontend space for the last couple of years and it's been pretty interesting to see how Vite has progressed
+
+- With Laravel 9 adopting Vite, I thought it might be worth sharing a refresher on frontend space, specifically around bundling
+
+- But also looking at where things are now and where it's headed
+
+- I've tried to keep it simple and  high level but let me know if you have any questions
 -->
 
 ---
@@ -54,44 +59,40 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 - My name is Harlan
 - Living in Canberra currently
 - Been doing open-source for over a year now
-- If you use Twitter then you should definitely give me a follow
+- If you use Twitter, then you should definitely give me a follow
 -->
 
 ---
-layout: section
+layout: two-cols
 ---
 
-# Quick Glossary
+# Quick Glossary (in simple terms)
+
+::left::
 
 ## Bundling
 
-- Taking an entry module or modules and transforming them and their dependencies into a discrete output
-- Could involve dependency graph resolving, concatenating, minifying, transforming, etc
+1. With some assets (js, css, images, etc)
+1. Maybe transform them
+2. And give them a good smooshing (minify, concat)
+
 - Basis of optimising assets in the browser
+
+::right::
+
+## Module
+
+- Some code that exports something that you can import
+- In PHP you could consider a class a module
+- Sticks to a standard
 
 <!--
 - Very quickly want to give you a glossary of these terms in case they're completely new to
--->
-
----
-layout: section
----
-
-# Quick Glossary
-
-## Module (according to webpacK)
-
-- Discrete chunk of functionality. 
-- A solid abstractions and encapsulation of boundaries with a coherent design and a clear purpose within the overall application.
-
-## In other words
-
-- Anything that you can import.
-- In PHP you could consider a PHP Class or Namespace a module.
-- A module usually sticks to a specific standard so that the ecosystem can work togethor
-
-<!--
 - think any file is going to be a module
+
+- module is a term that you come accross when working with javascript packages OR frontend bundlers such as webpack
+
+- we'll go through these a bit more later so all good if that doesn't make sense
 -->
 
 ---
@@ -117,7 +118,7 @@ size: sm
 # Stone Age: Birth of Tooling
 
 
-**Tools**: <logos-html-5 /> HTML 5, <logos-css-3 /> CSS 3, <logos-sass /> Sass,  jQuery, maybe your IDE helped you
+**Tools**: <logos-html-5 /> HTML 5, <logos-css-3 /> CSS 3, jQuery, Bootstrap, <logos-sass /> Sass, maybe your IDE helped you
 
 **Module Standard**: IIFE
 
@@ -130,7 +131,7 @@ size: sm
 
 ::right::
 
-- Manually run most tools if your IDE didn't for you
+- Manually run most tools if your IDE didn't for you (concats, minifies, autoprefixers, validators)
 - Caching?
 
 <!--
@@ -156,7 +157,7 @@ size: xl
 
 # IIFE (Immediately Invoked Function Expression)
 
-```javascript
+```javascript {all|1,7|2}
 (function () {
   window.$myLib = {
     greeting() {
@@ -227,7 +228,7 @@ size: xl
 
 - The browser engines were way out of sync, you'd run into a lot of issues when testing between the browsers of what was supported, what needed vendor prefixes, etc
 
-- Websites were slow, while generally they had less scripts than today, the optimisations around them were minimal
+- Websites were slow, while generally they had less scripts than today, the surrounding optimisations were minimal
 
 - IIFE were very difficult to optimise and you could run into conflicts within the global scope
 
@@ -243,7 +244,7 @@ layout: section
 </div>
 
 <!--
-- This is the represtation of a Stone Age web developer
+- This is the representation of a Stone Age web developer
 
 - While it was extra manual work to optimise things, it wasn't too complicated, not a bad time
 
@@ -259,7 +260,7 @@ size: sm
 
 **Tools**: <logos-grunt /> Grunt, <logos-gulp /> Gulp, <logos-browserify-icon /> Browserify, <logos-bower /> Bower, <logos-require /> Require.js, <logos-laravel /> Laravel Elixir
 
-**Module Standards**: CommonJS, AMD, UMD, IIFE
+**Module Standards**: CJS, AMD, UMD, IIFE
 
 ::left::
 
@@ -282,7 +283,7 @@ size: sm
 
 - The paradigm was on "Task Running", so having a pipeline of tasks to execute things
 
-- So begins in the Bronze age the great Module wars, as you can see there, we have now have four competing module types
+- So begins in the Bronze age the great Module wars, as you can see there, we now have four competing module types
 
 - Let's see what different they have
 -->
@@ -292,20 +293,20 @@ layout: section
 size: xl
 ---
 
-# CommonJS
+# CJS (CommonJS) - Node Standard
 
-```javascript myLib.js
+```javascript {all|1}
 modules.exports.greeting = function() {
   console.log('Hello world!')
 }
 ```
 
-```javascript
+```javascript {all|1}
 const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
-Note: The browser **does not** understand this code.
+Note: The browser **does not** understand this code. Node does understand this.
 
 <!--
 - CommonJS modules were the original way to package JavaScript code for Node.js.
@@ -315,12 +316,11 @@ Note: The browser **does not** understand this code.
 
 ---
 layout: section
-size: xl
 ---
 
-# AMD (Async Module Definition)
+# AMD (Async Module Definition) - Browser Standard
 
-```javascript myLib.js
+```javascript {all|1}
 define(function () {
     return {
         greeting: function () {
@@ -330,7 +330,7 @@ define(function () {
 });
 ```
 
-```javascript
+```javascript {all|1}
 const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
@@ -408,10 +408,10 @@ layout: two-cols
 - Many competing tools and module standards
 - Task runners are not intuitive and painful to configure
 - Builds are slow, full rebuilds needed for code changes
-- The Ecosystem is not efficient, hard for packages to leverage each other's code
+- The ecosystem is not efficient, hard for packages to leverage each other's code
 
 <!--
-- bit of fratration out of this age, package authors were fighting against the standards
+- bit of frustration out of this age, package authors were fighting against the standards
 - devs were struggling to configure these task runners
 - build times were slow
 - Overall the ecosystem wasn't efficient
@@ -426,7 +426,7 @@ layout: section
 </div>
 
 <!--
-- yup this is us now, bit frastrating
+- yup this is us now, bit frustrating
 -->
 
 ---
@@ -434,7 +434,7 @@ layout: two-cols
 size: sm
 ---
 
-# Iron Age: Dependency Graph / Loaders Paradigm
+# Iron Age: Webpack Time
 
 **Tools**: <logos-webpack /> webpack, <logos-babel /> Babel, <logos-npm-icon /> NPM
 
@@ -450,7 +450,7 @@ size: sm
 
 ::right::
 
-- Dependency graphs
+- Dependency graph resolving
 - NPM and babel are now the norm
 - CJS exports becomes the norm, AMD and UMD losing favour
 
@@ -460,9 +460,11 @@ layout: section
 size: sm
 ---
 
-# Dev Server (Hot Module Replacement)
+# Quick Glossary (in simple terms)
 
-- Use a HTTP server to serve bmodules locally (listening on port 3000, 8080 usually)
+## Dev Server (Hot Module Replacement)
+
+- Use a HTTP server to serve modules locally (listening on port 3000, 8080 usually)
 - Websocket communicating file changes so modules can be reloaded
 
 ---
@@ -470,7 +472,9 @@ layout: section
 size: sm
 ---
 
-# Code Splitting
+# Quick Glossary (in simple terms)
+
+## Code Splitting
 
 - Split your code into multiple bundles to optimise performance
 - Dynamic imports
@@ -481,7 +485,9 @@ layout: section
 size: sm
 ---
 
-# Tree Shaking
+# Quick Glossary (in simple terms)
+
+## Tree Shaking
 
 - Remove dead code
 - e.g. Use a single function from lodash instead of loading the entire package
@@ -527,9 +533,8 @@ size: xs
 
 # Iron Age Problems
 
-- Incredibly painful to understand and configure webpack
-- Slow and hard to debug webpack
-- Dev-server and HMR builds do not scale well
+- Incredibly painful to understand, configure and debug webpack
+- Dev-server and HMR builds do not scale well, very slow
 - Lots of boilerplate
 
 
@@ -537,45 +542,59 @@ size: xs
 layout: section
 ---
 
-
 <div class="h-full flex items-center">
 <img src="img_4.png" class="w-85 mx-auto">
 </div>
+
+<!--
+- we thought we were very clever and we did some solve big issues with webpack, but the developer experience was getting worst in some ways
+-->
 
 ---
 layout: two-cols
 size: sm
 ---
 
-# Middle Ages: Abstractions and new tools
+# Middle Ages: Solving Webpack
 
-**Tools**: <logos-laravel /> Laravel Mix, <logos-rollup /> Rollup, <logos-esbuild /> esbuild, <logos-parcel-icon /> Parcel, <logos-typescript-icon /> TypeScript
+**Tools**: <logos-webpack /> Webpack 5, <logos-rollup /> Rollup, <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript,  <logos-laravel /> Laravel Mix, <logos-nuxt-icon /> Nuxt, <logos-nextjs-icon class="bg-white px-1px rounded" /> Next
 
-**Module Standard**: ESM (new), CommonJS
+**Module Standards**: ESM, CJS, AMD, UMD, IIFE
 
 ### Innovations
 
 ::left::
 
-- Age of the frontend framework
+- Powerful abstraction layers (Mix, Nuxt, Next, etc)
 - Much less boilerplate, things _just work_
-- DX is pretty good
+- Esbuild speeds things up a lot, more focus on building better optimised tools in other languages
 
 ::right::
 
 - ESM modules start gaining some interest, exporting CJS is now the standard
-- Esbuild speeds builds up a lot
 - Rollup provides a much nicer API than webpack
+- TypeScript demand is high
 
+<!--
+- Middle ages I characterise as the age of solving webpack
+
+- Solving the complexity of configuring, which showed itself through abstraction layers and frontend frameworks, such as Laravel Mix, Nuxt, Next, etc
+
+- Babel which was a core loader of webpack had performance issues which people wanted to solve, specifically esbuild
+
+- With the ecosystem now using each others packages more, we needed a stricter way and less buggy way to communicate package APIs, hense the shift of things towards TypeScript
+
+- Rollup grew out of the frastrations of the webpack API and documentation
+-->
 
 ---
 layout: section
 size: xl
 ---
 
-# ESM (ECMAScript module)
+# ESM / MJS (ECMAScript module) - ES6
 
-```javascript myLib.js
+```javascript {all|5}
 function greeting () {
   console.log('Hello world!')
 }
@@ -583,15 +602,33 @@ function greeting () {
 export { greeting }
 ```
 
-```javascript
+```javascript {all|1}
 import { greeting } from './myLib.js'
 
 // Hello World
 greeting()
 ```
 
-Note: Node understands this. Browsers will eventually understand this.
+Note: Node understands this. Browsers will eventually understand this with time and some magic.
 
+
+---
+
+# Esbuild Performance
+
+<img src="https://raw.githubusercontent.com/evanw/esbuild/master/images/benchmark-dark.svg" />
+
+<!--
+- esbuild is just insanely fast
+-->
+
+---
+
+![img_6.png](img_6.png)
+
+<!--
+- typescript usage had a slow growth but has really exploded
+-->
 
 ---
 layout: section
@@ -601,9 +638,13 @@ size: xs
 # Middle Ages Issues
 
 - Build and HMR time for mid-large size apps is becoming a problem, even with tools like esbuild
-- The ecosystem is divided between webpack and other bunlders (Rollup)
-- Module compatibility remains a frustrating topic (CJS, ESM)
+- The ecosystem is divided between webpack, Rollup and other solutions
+- Module compatibility remains a frustrating topic (CJS, ESM. AMD, UMD, IIFE)
 
+<!--
+- this is specifically what Laravel Mix has issues with
+- main issue is really performance for most developers, it's just too slow
+-->
 
 ---
 
@@ -611,29 +652,86 @@ size: xs
 <img src="img_3.png" class="w-85 mx-auto">
 </div>
 
+<!--
+- all had our big brain masks on but we were still having a lot of issues
+-->
+
 ---
 layout: two-cols
 ---
 
-# Modern Era: Paradigm Shift
+# Modern Era: Just In Time
 
-**Tools**: <logos-vitejs /> Vite, <logos-snowpack /> Snowpack, <logos-wmr /> WMR, <logos-deno /> Deno
+**Tools**: <logos-vitejs /> Vite, <logos-snowpack class="bg-white rounded px-2px" /> Snowpack, <logos-wmr /> WMR, <logos-deno /> Deno
 
-**Module Standards**: ESM only
+**Module Standards**: ESM, CJS, AMD, UMD, IIFE
 
 ## Innovations
 
 ::left::
 
-- Delivery native ESM to browsers
-- Just-In-Time file transpiling
-- Leverage browser native support and caching
+- Zero config solutions
+- Minimal building with JIT
+- Leverage native browser ESM support and caching
 
 ::right::
 
-- Drop webpack for Rollup
-- New JavaScript runtimes
-- Native TypeScript
+- Rollup taking over webpack
+- New JavaScript runtimes (deno)
+- Native TypeScript support default
+
+<!--
+- Welcome to the modern era, the era of things being just in time
+-->
+
+---
+layout: section
+---
+
+# Vite
+
+Tech: <logos-rollup /> Rollup,  <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript
+
+- Not a "bundler", rather, it's a pre-configured build environment using the Rollup bundler and a tool for local development
+- "Enhanced" Native ESM
+- Delivers modules one-by-one over HTTP requests rather building them all togethor
+- Language agnostic
+
+- Acts as a low-mid level layer between bundlers (Rollup) and frameworks (Laravel)
+
+---
+layout: section
+---
+
+# Vite Code
+
+```html {all|1,3}
+<script type="module">import "/vite/client"</script>
+<div id="app"></div>
+<script type="module" src="/@app/index.js"></script>
+```
+
+---
+layout: section
+---
+
+# Vite waterfall
+
+
+<div class="flex items-center">
+<img src="img_7.png" class="w-150 mx-auto">
+</div>
+
+
+---
+layout: section
+---
+
+# Modern Era Issues
+
+- Lots of new frameworks popping up, hard to keep accross them (Astro, Fresh, Solid, etc)
+- Still quite a bit of JavaScript for basic sites
+- Migration can be difficult, many stuck in the Middle ages
 
 ---
 
@@ -642,21 +740,12 @@ layout: two-cols
 </div>
 
 ---
-layout: section
----
-
-# Vite
-
-- Bundling and pre-bundling uses an opinionated Rollup configuration
-- other fact
-
----
 layout: two-cols
 ---
 
-# Future Era: An efficient ecosystem
+# Future Era: An efficient ecosystem?
 
-**Tools**: vite-node, Web Workers, Edge Rendering, Bun, StackBlitz, unjs
+**Tools**: Vite Node, Web Workers, Edge Rendering, Bun, StackBlitz, UnJS, Nuxt v3
 
 **Module Standard**: ESM
 
@@ -664,15 +753,24 @@ layout: two-cols
 
 ::left::
 
-- JavaScript packages must run anywhere, without bindings for any environment
-- Edge rendering for all web apps
+- JS packages will run anywhere, without bindings for node / browser (UnJS)
+- No build step
+- JIT rendering on the edge
 - Experimental runtimes like bun offering unparalleled speeds
 
 ::right::
 
+- Island based reactivity, 0 js runtime overhead
 - Custom runtimes supporting native TypeScript (vite-node) 
 - Powerful online IDE and runtimes like StackBlitz
-- Ecosystem initiatives to drop old ways of doing things (unjs)
+- CSS Pre Processors will be dropped
+
+---
+
+<div class="h-full flex items-center">
+<img src="img_8.png" class="w-120 mx-auto">
+</div>
+
 
 ---
 layout: section
@@ -680,9 +778,27 @@ layout: section
 
 # Takeaways
 
-- ESM is now the norm, CJS is slowly losing relevance but will be around for a while
-- The ecosystem is aligning, expect better efficiency across languages and more innovation
-- Browsers are now catching up, transpiling for production at some point may not be needed
+- Frontend has had a lot of inefficiencies over the years
+
+- The ecosystem is getting better and aligning (at a low / mid level)
+
+- Module standards are becoming more sane
+
+- Browsers are now catching up
+
+- Probably still easier to just SSR with PHP  / Laravel
+
+<!--
+# Takeaways
+
+- Relative to the PHP world, frontend has had a lot of inefficiencies in working togethor due to competing technologies
+
+- Things are getting better with language agnostic tools like Vite and standards being agreed on (ESM)
+
+- CJS is slowly losing relevance but will be around for a while
+
+- Browsers are now catching up with WebKit adoption, we'll need to do less to make code production ready
+-->
 
 ---
 layout: section

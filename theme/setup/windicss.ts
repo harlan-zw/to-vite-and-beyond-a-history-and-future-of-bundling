@@ -10,6 +10,7 @@ export default defineWindiSetup(() => ({
       resolve(__dirname, 'node_modules'),
     ],
   },
+  safelist: ['prose-sm', 'prose-xl', 'prose-2xl', 'prose-xs', 'prose-base'],
   preflight: true,
   shortcuts: {
     'bg-main': 'bg-white text-[#181818] dark:(bg-[#121212] text-[#ddd])',
