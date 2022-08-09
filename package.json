@@ -13,8 +13,10 @@
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.1.14",
+    "@iconify-json/material-symbols": "^1.1.13",
     "@iconify-json/openmoji": "^1.1.11",
-    "@iconify-json/simple-icons": "^1.1.20",
+    "@iconify-json/simple-icons": "^1.1.21",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@3.0.0-rc.6-27664440.41d6f37",
     "postcss": "^8.4.16"
   }
 }
