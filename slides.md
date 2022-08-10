@@ -15,7 +15,7 @@ css: windicss
 title: A brief history of bundling
 ---
 
-# To Laravel Vite and Beyond
+# To Vite and Beyond
 
 ## <div class="mt-10 text-2xl text-gray-300">A brief history of building frontend <br> and what the future holds</div>
 

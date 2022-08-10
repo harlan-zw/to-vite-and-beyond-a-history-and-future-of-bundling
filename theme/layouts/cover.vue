@@ -3,10 +3,11 @@ import { useMotion } from '@vueuse/motion'
 import { ref } from 'vue'
 import Default from "./default.vue";
 
-const box = ref()
+const webpack = ref()
+const rollup = ref()
 const vite = ref()
 
-const refs = [box, vite]
+const refs = [webpack, rollup, vite]
 
 refs.forEach((ref, index) => {
   const { variant } = useMotion(ref, {
@@ -45,10 +46,13 @@ refs.forEach((ref, index) => {
   <div class="slidev-layout cover w-full">
     <div class="my-auto w-full">
       <div class="mb-20">
-        <div ref="box" class="inline-block pointer-events-none mr-10">
-          <logos-laravel height="60" width="60" class="h-60px" />
+        <div ref="webpack" class="inline-block pointer-events-none mr-20">
+          <logos-webpack height="60" width="60" class="h-60px" />
         </div>
-        <div ref="vite" class="inline-block ">
+        <div ref="rollup" class="inline-block pointer-events-none mr-10">
+          <logos-rollup height="60" width="60" class="h-60px" />
+        </div>
+        <div ref="vite" class="inline-block ml-10">
           <logos-vitejs height="60" width="60" class="h-60px" />
         </div>
       </div>
