@@ -17,7 +17,7 @@ title: A brief history of bundling
 
 # To Vite and Beyond
 
-## <div class="mt-10 text-2xl text-gray-300">A history and future <br> of bundling.</div>
+## <div class="mt-10 text-2xl text-gray-300">A history and future of bundling</div>
 
 <div class="opacity-80 text-sm absolute -bottom-2 right-10">Talk By Harlan Wilton <img src="/img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
 
@@ -41,11 +41,21 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 ::left::
 
+<v-clicks>
+
 - Worked with Max at 4mation, mostly WordPress / some Laravel
 - Full time Freelancing and Open Source
-- <logos-nuxt-icon /> Nuxt (insider), <logos-vue /> VueUse, <windi-icon /> WindiCSS, <logos-vitejs /> Vite (ecosystem)
+- Team member: <logos-vue /> VueUse, <windi-icon /> WindiCSS
+- Contributing: <logos-nuxt-icon /> Nuxt (insider), <logos-vitejs /> Vite (ecosystem)
+
+</v-clicks>
+
+<v-click>
 
 (still <openmoji-blue-heart/> <logos-laravel/>)
+
+</v-click>
+
 
 ::right::
 
@@ -145,7 +155,7 @@ layout: two-cols
 
 <div v-click>
 
-### What are these other modules: CJS / AMD / IIFE?
+### CJS / AMD / IIFE?
 
 </div>
 
@@ -273,15 +283,17 @@ size: xl
 <logos-jquery/>
 <logos-bootstrap /> 
 <logos-sass />
+<logos-nodejs-icon />
 <logos-brackets />
 <logos-sublimetext-icon />
 </v-click>
 
 <v-clicks>
 
-- Apps are not too complex. 
+- Apps are not too complex
 - No build step, no node_modules, no reactive javascript
 - IIFE modules: jQuery, Bootstrap, Polyfill, Lodash, etc
+- CJS Modules: Node is released with their own module format, not widely adopted
 
 </v-clicks>
 
@@ -393,6 +405,59 @@ size: sm
 - so the jQuery there would be an IIFE module
 -->
 
+
+---
+layout: section
+size: xl
+---
+
+# CommonJS (CJS)
+
+> CommonJS modules are the original way to package JavaScript code for Node.js.
+
+<v-click>
+
+- Synchronous and are loaded at runtime.
+
+</v-click>
+
+<v-click>
+
+```javascript {1}
+modules.exports.greeting = function() {
+  console.log('Hello world!')
+}
+```
+
+</v-click>
+
+<v-click>
+
+```javascript {1}
+const $myLib = require('./myLib.js')
+$myLib.greeting()
+```
+
+</v-click>
+
+<v-click>
+
+- Browser: <material-symbols-cancel-rounded class="text-red-300" /> requires transpiling 
+- Node <material-symbols-check-circle class="text-green-300" />
+
+</v-click>
+
+<!--
+- standard 
+
+- CommonJS modules were the original way to package JavaScript code for Node.js.
+- A browser does not understand this so would need to be transpiled
+- Fairly easy to optimise
+
+- advantages of code reusability and sharing, especially with NPM up and running now
+-->
+
+
 ---
 layout: section
 size: xl
@@ -400,9 +465,14 @@ size: xl
 
 # Stone Age Problems
 
-- IIFE modules are big, websites getting slow 
+<v-clicks>
+
+- Lots of IIFE modules, websites getting slow
+- Poor tooling support for using CJS on browsers
 - Maintaining third-party code is not fun
 - Many cross browser bugs
+
+</v-clicks>
 
 <!--
 - IIFE were very difficult to optimise, you'd need to roll your own version of a package only picking the things you were going to use
@@ -436,9 +506,8 @@ layout: section
 <logos-grunt />
 <logos-gulp />
 <logos-require/>
-<logos-bower /> 
 <logos-browserify-icon />
-<logos-nodejs-icon />
+<logos-bower />
 <logos-npm />
 <logos-angular-icon />
 </v-click>
@@ -447,7 +516,8 @@ layout: section
 
 - Apps and bundling getting more complex, task Runners are needed (Grunt, Gulp)
 - Angular joins the chat
-- Ecosystem divides on modules, transpiling for node or the browser (CJS, AMD, UMD, IIFE)
+- New module formats for the "modern" website: AMD and UMD
+- Using CJS in the browser is difficult, tooling support isn't good
 
 </v-clicks>
 
@@ -466,57 +536,6 @@ layout: section
 - Let's see what different they have
 
 - todo: LARAVEL MIX / GULP
--->
-
----
-layout: section
-size: xl
----
-
-# CommonJS (CJS)
-
-> CommonJS modules are the original way to package JavaScript code for Node.js. 
-
-<v-click>
-
-- They are synchronous and are loaded at runtime.
-
-</v-click>
-
-<v-click>
-
-```javascript {1}
-modules.exports.greeting = function() {
-  console.log('Hello world!')
-}
-```
-
-</v-click>
-
-<v-click>
-
-```javascript {1}
-const $myLib = require('./myLib.js')
-$myLib.greeting()
-```
-
-</v-click>
-
-<v-click>
-
-- Browser: <material-symbols-cancel-rounded class="text-red-300" /> requires transpiling
-- Node <material-symbols-check-circle class="text-green-300" />
-
-</v-click>
-
-<!--
-- standard 
-
-- CommonJS modules were the original way to package JavaScript code for Node.js.
-- A browser does not understand this so would need to be transpiled
-- Fairly easy to optimise
-
-- advantages of code reusability and sharing, especially with NPM up and running now
 -->
 
 ---
@@ -614,10 +633,14 @@ layout: two-cols
 
 # Bronze Age Problems
 
+<v-clicks>
+
 - Many competing tools and module standards
 - Task runners are not always intuitive and painful to configure
 - Builds are slow, full rebuilds needed for code changes
 - The ecosystem is not efficient, hard for packages to leverage each other's code
+
+</v-clicks>
 
 <!--
 - bit of frustration out of this age, package authors were fighting against the standards
@@ -667,8 +690,9 @@ layout: section
 
 <v-clicks>
 
-- Webpack adopted as the module bundler for JavaScript applications
+- Webpack released as first end-to-end solution for bundling
 - Seriously complex apps are being built
+- Early Webpack uses CJS and shifts the ecosystem
 
 </v-clicks>
 
@@ -699,6 +723,50 @@ layout: section
 - Code minification
 
 </v-clicks>
+
+
+---
+
+<div class="w-3/4">
+<svg viewBox="0 0 1896 1071" fill="none" xmlns="http://www.w3.org/2000/svg">
+<text fill="#FFAA3E" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="46" y="132.344">Bundle based dev server</tspan></text>
+<rect x="48" y="239" width="1086" height="767" rx="98" stroke="#FFC36B" stroke-width="4"></rect>
+<rect x="108" y="577" width="212" height="83" rx="10" fill="#C3E88C"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="170" y="631.488">entry</tspan></text>
+<rect x="476" y="712" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0.33em"><tspan x="552.5" y="768.988">···</tspan></text>
+<rect x="476" y="438" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="537" y="494.988">route</tspan></text>
+<rect x="473" y="576" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="534" y="632.988">route</tspan></text>
+<path d="M472.614 481.699L438.815 489.291L462.289 514.766L472.614 481.699ZM324.582 622.18L454.791 502.201L450.726 497.789L320.516 617.768L324.582 622.18Z" fill="#E06666"></path>
+<path d="M469 620L439 602.679V637.321L469 620ZM323 623H442V617H323V623Z" fill="#E06666"></path>
+<path d="M472.614 756.105L462.032 723.12L438.757 748.777L472.614 756.105ZM320.533 622.196L450.601 740.186L454.632 735.742L324.565 617.752L320.533 622.196Z" fill="#E06666"></path>
+<path d="M822.052 905.098L815.036 871.175L789.166 894.213L822.052 905.098ZM689.041 760.243L801.856 886.929L806.337 882.939L693.521 756.253L689.041 760.243Z" fill="#FFC36B"></path>
+<path d="M819.908 756.105L811.894 722.403L786.715 746.195L819.908 756.105ZM689.1 622.034L799.185 738.54L803.546 734.419L693.462 617.914L689.1 622.034Z" fill="#FFC36B"></path>
+<path d="M817.765 623.19L788.215 605.112L787.334 639.742L817.765 623.19ZM691.205 622.973L790.697 625.502L790.85 619.504L691.357 616.975L691.205 622.973Z" fill="#FFC36B"></path>
+<path d="M818.837 481.699L789.286 463.622L788.406 498.252L818.837 481.699ZM692.277 481.483L791.769 484.012L791.922 478.014L692.429 475.485L692.277 481.483Z" fill="#FFC36B"></path>
+<path d="M819.909 340.209L786.924 350.795L812.584 374.067L819.909 340.209ZM696.719 480.499L803.992 362.224L799.547 358.193L692.275 476.468L696.719 480.499Z" fill="#FFC36B"></path>
+<path d="M817.765 614.614L810.467 580.751L784.789 604.002L817.765 614.614ZM692.273 480.497L797.418 596.614L801.866 592.587L696.721 476.47L692.273 480.497Z" fill="#FFC36B"></path>
+<rect x="822" y="288" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="864" y="344.988">module</tspan></text>
+<rect x="822" y="435" width="212" height="87" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="864" y="491.488">module</tspan></text>
+<rect x="820" y="571" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="862" y="627.988">module</tspan></text>
+<rect x="822" y="718" width="212" height="87" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="864" y="774.488">module</tspan></text>
+<rect x="822" y="864" width="212" height="88" rx="10" fill="#4FC08D"></rect>
+<text fill="#15505C" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0.33em"><tspan x="898.5" y="920.988">···</tspan></text>
+<path d="M1239 627L1209 609.679V644.321L1239 627ZM1136 630H1212V624H1136V630Z" fill="#FFC36B"></path>
+<path d="M1596 627L1566 609.679V644.321L1596 627ZM1493 630H1569V624H1493V630Z" fill="#FFC36B"></path>
+<rect x="1239" y="545" width="254" height="144" rx="10" fill="#C692EA"></rect>
+<text fill="white" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="1306.5" y="629.988">Bundle</tspan></text>
+<rect x="1596" y="543" width="254" height="143" rx="10" fill="#009688"></rect>
+<text fill="white" xml:space="preserve" style="white-space: pre" font-size="38" font-weight="600" letter-spacing="0em"><tspan x="1667.71" y="604.988">Server
+</tspan><tspan x="1675.76" y="649.988">ready</tspan></text>
+</svg>
+</div>
 
 ---
 layout: section
@@ -768,6 +836,7 @@ layout: section
 
 <v-clicks>
 
+- Getting everyone to use CJS properly is difficult
 - Incredibly painful to understand, configure and debug webpack
 - Builds are not scaling well, getting very slow as application grows
 - Lots of boilerplate
@@ -1100,7 +1169,27 @@ layout: section
 - enhanced native ESM, this is just about it replacing file paths when importing so the browser better understands what's going on
 -->
 
+---
+layout: section
+---
 
+<div class="w-3/4 mx-auto">
+
+<img src="/img_13.png">
+</div>
+
+
+---
+layout: section
+---
+
+# Vite Revisited
+
+<v-clicks>
+
+- Ecosystem agrees Vite is good, start working together 
+
+</v-clicks>
 
 ---
 layout: section
@@ -1166,12 +1255,14 @@ layout: section
 layout: section
 ---
 
+# Future Era: Efficient DX and Ecosystem
+
 <v-clicks>
 
 - JS packages will run anywhere, without bindings for node / browser (UnJS)
-- JIT, no build step, rendering on the edge
-- Experimental runtimes offering unparalleled speeds (bun)
-- Island hydration, 0kb js runtime overhead
+- Everything on-demand, just in time
+- Experimental JS runtimes for crazy speeds (bun)
+- Island hydration
 - Custom JS runtimes supporting native TypeScript (vite-node)
 - Powerful online IDE and runtimes like StackBlitz
 
@@ -1196,8 +1287,6 @@ layout: section
 - Vite was the natural next step of the frontend ecosystem with ESM modules getting node and browser support
 
 - New ecosystem efficiency is unlocked with aligning at a low / mid level and on the ESM module standard
-
-- Has taken almost 6 years for Browsers and Node to support a language update (ES5 -> ES6)
 
 <!--
 # Takeaways
