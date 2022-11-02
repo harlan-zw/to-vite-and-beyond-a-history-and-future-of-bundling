@@ -2,14 +2,14 @@
 
 > A history and future of bundling.
 
-Presented by [Harlan Wilton](https://harlanzw.com).
+[Slides](https://to-vite-and-beyond-a-history-and-future-of-bundling.vercel.app/)
 
-To start the slide show:
+## Abstract
 
-- `npm install`
-- `npm run dev`
-- visit http://localhost:3030
+Why does Vite exist?
+To understand that, we need to know how we got to Vite.
 
-Edit the [slides.md](./slides.md) to see the changes.
+This talk will cover the history of bundling and module formats, 
+from the early days of the web to the present day. 
 
-Learn more about Slidev on [documentations](https://sli.dev/).
+Finally, we'll look at the future of bundling.
