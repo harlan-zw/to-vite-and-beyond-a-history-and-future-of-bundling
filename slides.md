@@ -68,7 +68,7 @@ layout: section
 # Why does Vite exist?
 
 <div v-click>
-<h2>Devs are not happy</h2>
+<h2 class="font-normal">Devs are not happy</h2>
 </div>
 
 <v-click>
@@ -107,11 +107,12 @@ layout: section
 
 </div>
 
+
 ---
 layout: two-cols
 ---
 
-# How to go fast?
+# How to go fast? Some questions...
 
 ::left::
 
@@ -174,6 +175,13 @@ layout: two-cols
 - We're going to go back in time and see how we've dealt with bundling over the ages
 -->
 
+---
+layout: two-cols
+---
+
+# How to unite the ecosystem?
+
+
 
 ---
 class: text-center
@@ -184,44 +192,32 @@ layout: section
 
 ## <div class="mt-10 text-2xl text-gray-300">Let's go back in time to when it was simple.</div>
 
----
-class: text-center
-layout: section
----
-
-
-<!--
-- Now let's get into it
-
-- We're going to go back in time and see how we've dealt with bundling over the ages
--->
-
-
 
 ---
 layout: two-cols
 ---
 
-# Quick Glossary (in simple terms)
+# Quick Glossary
 
 ::left::
 
-## Bundling (building)
+<v-click>
+
+## Bundling
 
 > Using tools that crawl, process and concatenate our source modules into files that can run in the browser.
 
-(webpack, Rollup, Parcel, grunt, gulp, shell)
+</v-click>
 
 ::right::
 
+<v-click>
+
 ## Modules
 
-- Some code that exports something that you can import
-- In PHP you could consider a class a module
-- Sticks to a standard
-- Focus: Reusable and sharable code
+> Mechanisms for splitting JavaScript programs up into separate modules that can be imported when needed.
 
-(App.vue, main.css, bootstrap.js, etc)
+</v-click>
 
 <!--
 - Very quickly want to give you a glossary of these terms in case they're completely new to
@@ -235,13 +231,12 @@ layout: two-cols
 ---
 class: text-center
 layout: section
+background: 'https://i.giphy.com/media/3oxRmvU3GAJay6F60g/giphy.webp'
 ---
 
 # Travel back in time...
 
-<img src="https://i.giphy.com/media/3oxRmvU3GAJay6F60g/giphy.webp" class="w-60 mx-auto rounded-full" />
-
-Building frontend through the ages
+<img src="https://i.giphy.com/media/3oxRmvU3GAJay6F60g/giphy.webp" class="w-80 mx-auto rounded-full" />
 
 <!--
 - Now let's get into it
@@ -251,7 +246,7 @@ Building frontend through the ages
 
 
 ---
-layout: two-cols-side
+layout: section
 size: xl
 ---
 
@@ -259,24 +254,37 @@ size: xl
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">~ 2008 - 2012</div>
 
-- No build step
-- No node_modules
-- No fancy reactive javascript
-- Lots of useful packages: jQuery, Bootstrap, Polyfill, Lodash, etc
+<style>
+.slidev-icon {
+  width: 70px !important;
+  height: auto !important;
+  margin-right: 15px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>
 
-::highlights::
+<br>
 
-<div><logos-html-5 /> HTML 5</div>
-<div><logos-css-3 /> CSS 3 </div>
-<div>jQuery</div>
-<div><logos-bootstrap /> Bootstrap</div>
-<div><logos-sass /> Sass</div>
-<div><logos-brackets /> Brackets</div>
-<div><logos-sublimetext-icon /> Sublime</div>
+<v-click>
+<logos-html-5 />
+<logos-css-3 />
+<logos-jquery/>
+<logos-bootstrap /> 
+<logos-sass />
+<logos-brackets />
+<logos-sublimetext-icon />
+</v-click>
 
-::modules::
+<v-clicks>
 
-IIFE
+- Apps are not too complex. 
+- No build step, no node_modules, no reactive javascript
+- IIFE modules: jQuery, Bootstrap, Polyfill, Lodash, etc
+
+</v-clicks>
+
 
 <!--
 - We are back in time, to the Stone age. 
@@ -298,10 +306,35 @@ IIFE
 
 ---
 layout: section
-size: xl
 ---
 
-# IIFE (Immediately Invoked Function Expression)
+<div class="h-full flex items-center">
+<img src="/img_11.png" class="h-80 rounded mx-auto my-auto">
+</div>
+
+<!--
+- This is the representation of a Stone Age web developer
+
+- While it was extra manual work to optimise things, it wasn't too complicated, not a bad time
+
+- Who amongst us is was part of this? Maybe you still build your sites like this?
+-->
+
+---
+layout: section
+---
+
+# Immediately Invoked Function Expression (IIFE)
+
+> IIFE modules were the first way we could split our code into separate files. 
+
+<v-click>
+
+- Immediately invoked functions that are wrapped in a closure, allowing a private scope for code.
+
+</v-click>
+
+<v-click>
 
 ```javascript {all|1,7|2}
 (function () {
@@ -313,12 +346,18 @@ size: xl
 })();
 ```
 
-```html
+</v-click>
+
+<v-click>
+
+```html {3}
 <script src="./myLib.js" type="text/javascript" />
 <script>
 $myLib.greeting()
 </script>
 ```
+
+</v-click>
 
 <!--
 - Immediately Invoked Function Expressions
@@ -337,17 +376,14 @@ size: sm
 
 # HTML Example
 
-```html {all|4-5,10}
+```html {all|4,7}
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="./css/style.css" />
   <script type="text/javascript" href="./lib/jquery-2.1.3.min.js" />
-  <title>My cool app</title>
 </head>
 <body>
-    <!--  ... -->
-    <script type="text/javascript" src="./App.js" />
+    <script type="text/javascript" src="./app-concat.min.js" />
 </body>
 </html>
 ```
@@ -364,8 +400,8 @@ size: xl
 
 # Stone Age Problems
 
-- Websites are bloating quickly with IIFE modules
-- Maintaining third-party packages is cumbersome
+- IIFE modules are big, websites getting slow 
+- Maintaining third-party code is not fun
 - Many cross browser bugs
 
 <!--
@@ -374,52 +410,47 @@ size: xl
 - The browser engines were way out of sync, you'd run into a lot of issues when testing between the browsers of what was supported, what needed vendor prefixes, etc
 -->
 
+
 ---
 layout: section
 ---
 
-<div class="h-full flex items-center">
-<img src="/img_2.png" class="h-80 rounded mx-auto my-auto">
-</div>
-
-<!--
-- This is the representation of a Stone Age web developer
-
-- While it was extra manual work to optimise things, it wasn't too complicated, not a bad time
-
-- Who amongst us is was part of this? Maybe you still build your sites like this?
--->
-
----
-layout: two-cols-side
-size: sm
----
-
-# Bronze Age: It's a Web App Actually
+# Bronze Age: Web App Time
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">~ 2012 - 2014</div>
 
-- Task Runners are adopted (Grunt, Gulp)
-- CSS pre-processors take on wide adoption (SASS, LESS, etc)
-- Started seeing some abstractions pop up (Laravel Elixir)
+<style>
+.slidev-icon {
+  width: 70px !important;
+  height: auto !important;
+  margin-right: 15px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>
+
+<br>
+
+<v-click>
+<logos-grunt />
+<logos-gulp />
+<logos-require/>
+<logos-bower /> 
+<logos-browserify-icon />
+<logos-nodejs-icon />
+<logos-npm />
+<logos-angular-icon />
+</v-click>
+
+<v-clicks>
+
+- Apps and bundling getting more complex, task Runners are needed (Grunt, Gulp)
 - Angular joins the chat
-- Module wars start, code for node (+ transpile) or browser
+- Ecosystem divides on modules, transpiling for node or the browser (CJS, AMD, UMD, IIFE)
 
-::highlights::
+</v-clicks>
 
-<div><logos-grunt /> Grunt</div>
-<div> <logos-gulp /> Gulp</div>
-<div><logos-require /> Require.js</div>
-<div><logos-bower /> Bower</div>
-<div><logos-browserify-icon /> Browserify</div>
-<div><logos-laravel /> Laravel Elixir</div>
-<div><logos-nodejs-icon /> Node.js</div>
-<div><logos-npm /> NPM</div>
-<div><logos-angular-icon class="bg-white" /> Angular</div>
-
-::modules::
-
-CJS, AMD, UMD, IIFE
 
 <!--
 - Now we enter the bronze age
@@ -442,21 +473,41 @@ layout: section
 size: xl
 ---
 
-# CJS (CommonJS) - Node Standard
+# CommonJS (CJS)
 
-```javascript {all|1}
+> CommonJS modules are the original way to package JavaScript code for Node.js. 
+
+<v-click>
+
+- They are synchronous and are loaded at runtime.
+
+</v-click>
+
+<v-click>
+
+```javascript {1}
 modules.exports.greeting = function() {
   console.log('Hello world!')
 }
 ```
 
-```javascript {all|1}
+</v-click>
+
+<v-click>
+
+```javascript {1}
 const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
+</v-click>
+
+<v-click>
+
 - Browser: <material-symbols-cancel-rounded class="text-red-300" /> requires transpiling
 - Node <material-symbols-check-circle class="text-green-300" />
+
+</v-click>
 
 <!--
 - standard 
@@ -472,24 +523,41 @@ $myLib.greeting()
 layout: section
 ---
 
-# AMD (Async Module Definition) - Browser Standard
+# Async Module Definition (AMD)
 
-```javascript {all|1}
+> AMD modules are the original way to package JavaScript code for the browser. 
+
+<v-click>
+
+- They are asynchronous and are loaded at runtime. Created by RequireJS.
+
+</v-click>
+
+
+<v-click>
+
+```javascript {1,7}
 define(function () {
-    return {
-        greeting: function () {
-            console.log('Hello world!')
-        }
-    };
+    return { greeting: function () { console.log('Hello world!') }  };
 });
 ```
 
-```javascript {all|1}
+</v-click>
+
+<v-click>
+
+```javascript {1}
 const $myLib = require('./myLib.js')
 $myLib.greeting()
 ```
 
+</v-click>
+
+<v-click>
+
 - Browser & Node: <material-symbols-check-circle class="text-green-300" /> (with Require.js, no transpiling needed)
+
+</v-click>
 
 <!--
 - AMD was developed by Require.js
@@ -501,9 +569,19 @@ layout: section
 size: xl
 ---
 
-# UMD (Universal Module Definition)
+# Universal Module Definition (UMD)
 
-```javascript myLib.js
+> UMD modules are a way to package JavaScript code for the browser and Node.js.
+
+<v-click>
+
+- Aims to be compatible with both CommonJS and AMD
+
+</v-click>
+
+<v-click>
+
+```javascript  {all|10}
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define([], factory);
@@ -513,44 +591,21 @@ size: xl
         root.returnExports = factory();
   }
 }(typeof self !== 'undefined' ? self : this, function () {
-    return {
-      greeting () { console.log('Hello World') }
-    };
+    return { greeting () { console.log('Hello World') } };
 }));
-// ...
-const $myLib = require('./myLib.js')
-$myLib.greeting()
 ```
 
+</v-click>
+
+<v-click>
+
 - Browser & Node: <material-symbols-check-circle class="text-green-300" />
+
+</v-click>
 
 <!--
 - UMD was a way to ship a package that could be used from AMD or CommonJS module
 - Bit complex and hacky
--->
-
----
-layout: section
----
-
-# Gulp Pipelines Example
-
-```ts {all|4-11}
-const source = './src/js/*.js';
-
-src(source)
-  .pipe(changed(source))
-  .pipe(concat('bundle.js'))
-  .pipe(uglify())
-  .pipe(rename({
-    extname: '.min.js'
-  }))
-  .pipe(dest('./assets/js/'))
-  .pipe(browsersync.stream());
-```
-
-<!--
-- Example of the pipeline paradigm in which we were in
 -->
 
 ---
@@ -584,29 +639,38 @@ layout: section
 -->
 
 ---
-layout: two-cols-side
-size: sm
+layout: section
 ---
 
 # Iron Age: Webpack Time
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">~ 2014 - 2016</div>
 
-- Dev Server with Hot Module Replacement
-- Code Splitting
-- Tree Shaking
-- Dependency graph resolving
-- CJS adoption grows
+<style>
+.slidev-icon {
+  width: 70px !important;
+  height: auto !important;
+  margin-right: 15px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>
 
-::highlights::
+<br>
 
-<div><logos-webpack /> webpack</div>
-<div><logos-vue /> Vue.js</div>
-<div><logos-react /> React</div>
+<v-click>
+<logos-webpack />
+<logos-vue />
+<logos-react />
+</v-click>
 
-::modules::
+<v-clicks>
 
-CJS, AMD, IIFE,  UMD
+- Webpack adopted as the module bundler for JavaScript applications
+- Seriously complex apps are being built
+
+</v-clicks>
 
 <!--
 - webpack came out at a similar time to Gulp, but Gulp had a lot more traction
@@ -618,31 +682,54 @@ CJS, AMD, IIFE,  UMD
 
 ---
 layout: section
-size: sm
 ---
 
-# Quick Glossary (in simple terms)
+# Webpack
 
-## Dev Server (Hot Module Replacement)
+> Webpack is a module bundler for JavaScript applications.
 
-- Use a HTTP server (express) to serve build modules locally (listening on port 3000, 8080 usually)
-- Websocket communicating file changes so modules can be reloaded (HMR)
-- HMR requires code to be in a module standard unless you want to reload everything
+<v-clicks>
 
+- Dev Server with Hot Module Replacement
+- Code Splitting
+- Tree Shaking
+- Dependency graph resolving
+- Module bundling
+- Asset bundling
+- Code minification
+
+</v-clicks>
 
 ---
 layout: section
 size: sm
 ---
 
-# Quick Glossary (in simple terms)
+# Dev Server (Hot Module Replacement)
 
-## Code Splitting
+<v-clicks>
+
+- Use an HTTP server (express) to serve build modules locally
+- Websocket communicating file changes so modules can be reloaded (HMR)
+- HMR requires code to be in a module standard unless you want to reload everything
+
+</v-clicks>
+
+---
+layout: section
+size: sm
+---
+
+# Code Splitting
+
+<v-clicks>
 
 - Split your code into multiple bundles to optimise performance
 - Bundles: vendor, app, lib, etc
 - Dynamic imports
-- e.g. separate pages js/css into their own bundles (network requests)
+- e.g. separate pages js/css and vendor code into their own bundles
+
+</v-clicks>
 
 <!--
 - when you build your code you can provide some hints to webpack on how the code should be split into different bundles
@@ -658,49 +745,20 @@ size: sm
 
 ---
 layout: section
-size: sm
 ---
 
-# Quick Glossary (in simple terms)
+# Tree Shaking
 
-## Tree Shaking
+<v-clicks>
 
 - Remove dead code
 - Only use code we need from external modules
+- Only use code we need from our own code
 - e.g. Use a single function from lodash instead of loading the entire package
+- e.g. Use a single component from a UI library instead of loading the entire package
 
+</v-clicks>
 
----
-layout: section
----
-
-# Webpack Config Example
-
-```ts {all|5-6,9-14}
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.s?css$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
-      },
-    ],
-  }
-}
-```
-
-<!--
-- this is an example of a webpack config file (common js)
-- you can see here we set rules on which rules should go through which loaders
--->
 
 ---
 layout: section
@@ -708,10 +766,14 @@ layout: section
 
 # Iron Age Problems
 
+<v-clicks>
+
 - Incredibly painful to understand, configure and debug webpack
 - Builds are not scaling well, getting very slow as application grows
 - Lots of boilerplate
 - node_modules big
+
+</v-clicks>
 
 <!--
 - because you're transpiling everything before you start, it's very slow
@@ -742,38 +804,46 @@ layout: section
 -->
 
 ---
-size: sm
-layout: two-cols-side
+layout: section
 ---
 
-# Middle Ages: ES6 And Solving Webpack
+# Middle Ages: ES6
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">~ 2016 - 2020</div>
 
-- Release of finalised ES6
-- Babel ships, allowing ES6 to ES5 transpiling
-- Powerful abstraction layers and frameworks released (Laravel Mix, Nuxt, Next, etc)
-- Much less boilerplate, things _just work_
-- ESM modules start gaining some interest, but difficult to support
-- Rollup provides a much nicer API than webpack
-- Rollup, a vastly improved webpack, grows its ecosystem
-- Reactive frameworks offering SSR
 
-::highlights::
+<style>
+.slidev-icon {
+  width: 70px !important;
+  height: auto !important;
+  margin-right: 15px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>
 
-<div><logos-rollup /> Rollup</div>
-<div><logos-laravel /> Laravel Mix</div>
-<div><logos-nuxt-icon /> Nuxt.js</div>
-<div><logos-nextjs-icon class="bg-white px-1px rounded" /> Next.js</div>
-<div><logos-babel /> Babel</div>
-<div><logos-yarn /> Yarn</div>
+<br>
 
-::modules::
+<v-click>
+<logos-rollup />
+<logos-nuxt-icon />
+<logos-nextjs-icon />
+<logos-babel /> 
+</v-click>
 
-ESM, CJS, AMD, UMD, IIFE
+<v-clicks>
+
+- Release of ES6, requires Babel to use
+- Greater need for module compatibility with Server Side Rendering gaining popularity
+- Webpack abstraction layers and frameworks released
+- ESM modules start gaining some traction, but have poor support
+- Rollup, a nicer API than webpack and more performant
+
+</v-clicks>
 
 <!--
-- Middle ages I characterise as ES^ and age of solving webpack
+- Middle ages I characterise as ES6 and age of solving webpack
 
 - Solving the complexity of configuring, which showed itself through abstraction layers and frontend frameworks, such as Laravel Mix, Nuxt, Next, etc
 
@@ -786,38 +856,37 @@ ESM, CJS, AMD, UMD, IIFE
 
 ---
 layout: section
-size: xl
 ---
 
-# ES6 - ECMAScript 2016
+# ECMAScriptModule (ESM)
 
-- Next iteration of JavaScript after ES5, 10 years in the making
-- ES5 was released in 2009, first major revision to JS. Node and browsers supported this quite early
-- ES6 is a HUGE DX improvements over vanilla JS
-- array functions, await / async, reduce, deprecates a lot of Lodash functions
-- Browsers and node do not understand it. Needs to be transpiled
+> ESM is a standard for defining JavaScript modules. It is the successor to the CommonJS module standard.
 
+<v-clicks>
 
----
-layout: section
-size: xl
----
+- Next iteration of JavaScript, 10 years in the making
+- ES6 is a HUGE DX improvements over vanilla JS, array functions, await / async, reduce, etc.
 
-# ESM (ECMAScript module) - ES6
+</v-clicks>
 
-```javascript {all|1,7}
-// myLib.js
+<v-click>
+
+```javascript {all|1,5}
 export function greeting () {
   console.log('Hello world!')
 }
 
-// app.js
 import { greeting } from './myLib.js'
 greeting()
 ```
 
+</v-click>
+
+<v-click>
 
 Browsers & Node: <material-symbols-cancel-rounded class="text-red-300" /> Babel is required to transpile.
+
+</v-click>
 
 <!--
 - had to transpile this at one point to CJS or AMD
@@ -829,15 +898,38 @@ Browsers & Node: <material-symbols-cancel-rounded class="text-red-300" /> Babel 
 
 ---
 layout: section
+---
+
+# Rollup
+
+> Rollup is a module bundler for JavaScript. Created by Rich Harris, the creator of Svelte
+
+<v-clicks>
+
+- Alternative to webpack. Nicer API, more performant and smaller bundles (better tree shaking)
+
+</v-clicks>
+
+<v-click>
+
+<img src="/img_12.png" class="w-110 mx-auto rounded" width="400">
+
+</v-click>
+
+---
+layout: section
 size: xs
 ---
 
 # Middle Ages Issues
 
-- Browsers and Node do not understand the new ES6 or ESM
-- Builds are still not scaling well and our applications are getting even bigger
-- The ecosystem is divided between webpack, Rollup and other solutions
-- Module compatibility is a frustrating topic for Open Source Devs (ESM, CJS. AMD, UMD, IIFE)
+<v-clicks>
+
+- Transpiling ES6 using Babel is slow
+- Transpiling mixed module formats are poorly supported (can't import CJS from ESM)
+- Maintainers frustrated by inconsistent module formats
+
+</v-clicks>
 
 <!--
 - this is specifically what Laravel Mix has issues with
@@ -859,34 +951,46 @@ size: xs
 -->
 
 ---
-layout: two-cols-side
+layout: section
 ---
 
-# Modern Era: Just In Time
+# Modern Era: Just In Time, Fall of Webpack
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">~ 2020 - PRESENT</div>
 
-- Leverage native browser ESM support and caching
-- Zero config solutions
-- Minimal building with JIT (stubbing)
-- Rollup is now established with a good ecosystem around it
+<style>
+.slidev-icon {
+  width: 70px !important;
+  height: auto !important;
+  margin-right: 15px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+</style>
+
+<br>
+
+<v-click>
+<logos-esbuild class="mr-1" />
+<logos-vitejs class="mr-1" />
+<logos-typescript-icon class="mr-1" />
+<logos-snowpack class="bg-white px-2px rounded mr-1" /> 
+<logos-parcel-icon class="mr-1" /> 
+<logos-wmr class="mr-1" /> 
+<logos-deno class="mr-1" /> 
+</v-click>
+
+<v-clicks>
+
+- Solutions to babel performance issues (Esbuild, SWC, Sucrase)
+- Browsers start supporting ESM natively (Vite, Snowpack, WMR)
+- Rollup is established with a solid ecosystem
+- TypeScript becomes a default
 - New JavaScript runtimes (DENO)
-- Native TypeScript support default
-- Esbuild speeds things up a lot
-- Package managers are mostly solving the node_modules problem (pnpm)
 
-::highlights::
+</v-clicks>
 
-<div><logos-esbuild class="mr-1" /> esbuild</div>
-<div><logos-typescript-icon class="mr-1" /> TypeScript</div>
-<div><logos-vitejs class="mr-1" /> Vite</div>
-<div><logos-javascript class="mr-1" /> JITI</div>
-<div><logos-snowpack class="bg-white px-2px rounded mr-1" /> Snowpack</div>
-<div><logos-parcel-icon class="mr-1" /> Parcel</div>
-<div><logos-wmr class="mr-1" /> WMR</div>
-<div><logos-deno class="mr-1" /> Deno</div>
-<div><logos-pnpm class="mr-1" /> PNPM</div>
-<div><logos-vitest class="mr-1" /> Vitest</div>
 
 ::modules::
 
@@ -898,13 +1002,67 @@ Legacy support: AMD, UMD
 - we've arrived at todays era, the modern era
 -->
 
+
+---
+layout: section
 ---
 
-# Esbuild Performance
+# Native ESModules
+
+> Native ESModules are supported in all modern browsers and Node 12+. No transpiling required.
+
+<v-clicks>
+
+- Same syntax as ESM / ES6
+- In the browser handles static and dynamic imports as HTTP requests, honouring cache headers
+
+</v-clicks>
+
+<v-click>
+
+```html
+<script type="module">import "/myLib.js"</script>
+
+<!-- GET /myLib.js -->
+```
+
+</v-click>
+
+<v-click>
+
+Browsers & Node: <material-symbols-check-circle class="text-green-300" />
+
+</v-click>
+
+<!--
+- had to transpile this at one point to CJS or AMD
+
+- ES6 was a huge update and included many other improvements besides the esmodule
+
+- You may see MJS files, these are ESM
+-->
+
+---
+layout: section
+---
+
+# Esbuild
+
+> An extremely fast JavaScript bundler and minifier, written in Go.
+
+<v-clicks>
+
+- Replaces babel, around 10x faster
+- Made by the CTO of Figma
+
+</v-clicks>
+
+<v-click>
 
 <img src="https://raw.githubusercontent.com/evanw/esbuild/master/images/benchmark-dark.svg" />
 
-- replaces babel / tsc / minifies / etc
+</v-click>
+
 
 <!--
 - esbuild is just insanely fast
@@ -913,40 +1071,22 @@ Legacy support: AMD, UMD
 -->
 
 ---
-
-# TypeScript Growth
-
-<div class="flex items-center">
-<img src="/img_6.png" class="w-170 mx-auto rounded" width="700">
-</div>
-
-<!--
-- typescript usage had a slow growth but has really exploded
--->
-
----
 layout: section
 ---
 
-# Vite
+# Vite Revisited
 
-Tech: <logos-rollup /> Rollup,  <logos-esbuild /> esbuild, <logos-typescript-icon /> TypeScript, Express
+<v-clicks>
 
-- Not a "bundler", rather, it's a pre-configured build environment using the Rollup bundler and a tool for local development
-- "Enhanced" Native ESM
-- Delivers JIT built modules one-by-one over HTTP requests rather building them all together
-- Acts as a low-mid level layer between bundlers (Rollup) and frameworks (Laravel) that any framework or language can adopt
-- Build step produces concat'd, minified, tree-shaken and code split ESM native code
+- Browser native ESM support (no dev bundling required) 
+- Supports any framework (Vue, React, Svelte, etc)
+- Vast plugin ecosystem, fast production bundling performance with <logos-rollup /> Rollup
+- Fast transpiling performance with <logos-esbuild /> Esbuild
+- Optimised dev server / HMR
 
-<!--
-- enhanced native ESM, this is just about it replacing file paths when importing so the browser better understands what's going on
--->
+</v-clicks>
 
----
-layout: section
----
-
-# Vite Code
+<v-click>
 
 ```html {all|1,3}
 <script type="module">import "/vite/client"</script>
@@ -954,15 +1094,22 @@ layout: section
 <script type="module" src="/@app/index.js"></script>
 ```
 
+</v-click>
+
+<!--
+- enhanced native ESM, this is just about it replacing file paths when importing so the browser better understands what's going on
+-->
+
+
+
 ---
 layout: section
 ---
 
-# Vite Ecosystem
-
 <div class="flex items-center">
-<img src="/img_10.png" class="w-100 mx-auto rounded" width="700">
+<img src="/img_10.png" class="w-120 mx-auto rounded" width="700">
 </div>
+
 
 ---
 layout: section
@@ -973,7 +1120,7 @@ layout: section
 - Lots of new frameworks popping up, hard to keep across them (Astro, Fresh, Solid, etc)
 - Still, quite a bit of JavaScript for basic sites
 - Migration can be difficult, many stuck in the Middle Ages
-- Supporting legacy module standards is still an issue, but it's better
+- Packages support new node runtimes
 
 
 ---
@@ -987,22 +1134,16 @@ this is us now, we've finally accomplished a might big brain
 -->
 
 ---
-layout: two-cols-side
+layout: section
 ---
 
 # Future Era: Efficient DX and Ecosystem
 
 <div class="font-mono text-lg italic opacity-90 -mt-5">PRESENT - FUTURE</div>
 
-- JS packages will run anywhere, without bindings for node / browser (UnJS)
-- JIT, no build step, rendering on the edge
-- Experimental runtimes offering unparalleled speeds (bun)
-- Partial hydration, 0kb js runtime overhead
-- Custom JS runtimes supporting native TypeScript (vite-node) 
-- Powerful online IDE and runtimes like StackBlitz
-- CSS Pre-Processors are on the way out
+<br>
 
-::highlights::
+<v-clicks>
 
 <div><logos-vitejs /> Vite Node (runtime)</div>
 <div><logos-vercel-icon /> Edge Rendering</div>
@@ -1012,16 +1153,29 @@ layout: two-cols-side
 <div><logos-javascript /> UnJS</div>
 <div><logos-nuxt-icon /> Nuxt v3</div>
 <div><logos-fresh /> Fresh</div>
+<div>Turbopack</div>
 
-::modules::
+</v-clicks>
 
-Default: ESM
-
-Legacy support: CJS
 
 <!--
 - by anywhere?
 -->
+
+---
+layout: section
+---
+
+<v-clicks>
+
+- JS packages will run anywhere, without bindings for node / browser (UnJS)
+- JIT, no build step, rendering on the edge
+- Experimental runtimes offering unparalleled speeds (bun)
+- Island hydration, 0kb js runtime overhead
+- Custom JS runtimes supporting native TypeScript (vite-node)
+- Powerful online IDE and runtimes like StackBlitz
+
+</v-clicks>
 
 ---
 
@@ -1045,8 +1199,6 @@ layout: section
 
 - Has taken almost 6 years for Browsers and Node to support a language update (ES5 -> ES6)
 
-- Probably still easier to just SSR with PHP / Laravel
-
 <!--
 # Takeaways
 
@@ -1067,12 +1219,15 @@ layout: section
 
 ## Learn More
 
-- Vite docs
-- patak.dev blog
-- Vite conf October 11th
+- Vite docs, discord
+- patak.dev, antfu.me blogs
+
+## Upcoming
+
+- Presenting at NuxtNation (free online conference) November 16th-17th
 
 ## Follow me
 
-<div class="opacity-85 text-sm mt-10">Twitter: <logos-twitter /> @harlan_zw</div>
+<div class="opacity-85 text-sm mt-10">Twitter: @harlan_zw</div>
 
-<div class="opacity-85 text-sm mt-10">GitHub: <logos-github /> @harlan-zw</div>
+<div class="opacity-85 text-sm mt-3">GitHub: @harlan-zw</div>

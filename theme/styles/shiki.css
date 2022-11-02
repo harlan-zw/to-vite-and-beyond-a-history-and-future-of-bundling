@@ -5,3 +5,17 @@
 .shiki-dark {
   background: #1b1b1b !important;
 }
+
+.shiki-container > .shiki {
+  padding: 1.5em !important;
+  font-size: 2em;
+}
+
+.slidev-code-wrapper > .shiki-container {
+  margin-bottom: 2em !important;
+}
+
+.prose pre {
+  margin: 0 !important;
+  padding: 0 !important;
+}
