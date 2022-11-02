@@ -17,16 +17,14 @@ title: A brief history of bundling
 
 # To Vite and Beyond
 
-## <div class="mt-10 text-2xl text-gray-300">A brief history of building frontend <br> and what the future holds</div>
+## <div class="mt-10 text-2xl text-gray-300">A history and future <br> of bundling.</div>
 
-<div class="opacity-80 text-sm absolute -bottom-2 right-10">Presentation By Harlan Wilton <img src="/img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
+<div class="opacity-80 text-sm absolute -bottom-2 right-10">Talk By Harlan Wilton <img src="/img.png" class="w-8 h-8 ml-2 rounded-full inline-block" /></div>
 
 <!--
 - Welcome everyone, great to be here and see some familiar faces. This is the first meetup I've been too in a long time, so very exciting to talk
 
 - Today I wanted to talk about Vite. Sure you've all heard of it by now.
-
-- With Laravel 9 adopting Vite, 
 
 - cover a brief history building frontend and what the future holds, pivotal moment for the space a lot of exciting things are happening
 
@@ -43,11 +41,11 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 
 ::left::
 
-- Harlan
-- Freelancer / Open Source Dev
-- Building in the Vue, Nuxt and Vite ecosystems
-- On the <windi-icon /> WindiCSS and <logos-vue /> VueUse teams
-- Sponsored by <logos-nuxt-icon /> Nuxt
+- Worked with Max at 4mation, mostly WordPress / some Laravel
+- Full time Freelancing and Open Source
+- <logos-nuxt-icon /> Nuxt (insider), <logos-vue /> VueUse, <windi-icon /> WindiCSS, <logos-vitejs /> Vite (ecosystem)
+
+(still <openmoji-blue-heart/> <logos-laravel/>)
 
 ::right::
 
@@ -61,6 +59,145 @@ image: https://source.unsplash.com/collection/94734566/1920x1080
 - If you use Twitter, then you should definitely give me a follow
 -->
 
+
+---
+class: text-center
+layout: section
+---
+
+# Why does Vite exist?
+
+<div v-click>
+<h2>Devs are not happy</h2>
+</div>
+
+<v-click>
+
+<p class="text-6xl mt-3">
+<span class="animated animate-pulse">🐌</span>
+<span class="animated animate-pulse animate-delay-0.3s">🐌</span>
+<span class="animated animate-pulse animate-delay-0.7s">🐌</span>
+</p>
+
+</v-click>
+
+<div v-click>
+<h2>Ecosystem is divided</h2>
+</div>
+
+
+<!--
+- Now let's get into it
+
+- We're going to go back in time and see how we've dealt with bundling over the ages
+-->
+
+
+---
+class: text-center
+layout: section
+---
+
+# How to make developers happy?
+
+<div v-click>
+
+
+<img src="https://i.giphy.com/media/HdcimOKferlkI/giphy.webp" class="w-1/2 mx-auto" />
+
+</div>
+
+---
+layout: two-cols
+---
+
+# How to go fast?
+
+::left::
+
+<div v-click>
+
+### What are native ESM modules?
+
+</div>
+
+<div v-click>
+
+### What is Rollup? <logos-rollup />
+
+
+</div>
+
+<div v-click>
+
+### What is esbuild? <logos-esbuild />
+
+</div>
+
+<div v-click>
+
+### What is a dev server?
+
+</div>
+
+::right::
+
+<div v-click>
+
+### What are these other modules: CJS / AMD / IIFE?
+
+</div>
+
+<div v-click>
+
+### What is webpack? <logos-webpack />
+
+</div>
+
+<div v-click>
+
+### What is HMR?
+
+</div>
+
+<div v-click>
+
+### What is babel? <logos-babel />
+
+</div>
+
+
+
+<!--
+- Now let's get into it
+
+- We're going to go back in time and see how we've dealt with bundling over the ages
+-->
+
+
+---
+class: text-center
+layout: section
+---
+
+# Too many questions.
+
+## <div class="mt-10 text-2xl text-gray-300">Let's go back in time to when it was simple.</div>
+
+---
+class: text-center
+layout: section
+---
+
+
+<!--
+- Now let's get into it
+
+- We're going to go back in time and see how we've dealt with bundling over the ages
+-->
+
+
+
 ---
 layout: two-cols
 ---
@@ -71,13 +208,9 @@ layout: two-cols
 
 ## Bundling (building)
 
-1. With some assets (js, css, images, etc)
-2. Maybe transform them
-3. And give them a smooshing (minify, concat)
+> Using tools that crawl, process and concatenate our source modules into files that can run in the browser.
 
-- Basis of optimising assets in the browser
-
-(webpack, rollup, grunt, gulp, shell)
+(webpack, Rollup, Parcel, grunt, gulp, shell)
 
 ::right::
 

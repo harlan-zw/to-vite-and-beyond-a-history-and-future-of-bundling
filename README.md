@@ -1,4 +1,8 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# To Vite and Beyond
+
+> A history and future of bundling.
+
+Presented by [Harlan Wilton](https://harlanzw.com).
 
 To start the slide show:
 
